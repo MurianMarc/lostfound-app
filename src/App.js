@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+
 import pb from "./pocketbase";
-import "./App.css"; // we’ll add some CSS here
+import "./App.css"; 
 
 function App() {
+  const fileInput = useRef(null);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
@@ -41,9 +44,10 @@ function App() {
 
   // Upload item
   const handleUpload = async () => {
-    if (!file) {
-      alert("Please select a file");
-      return;
+   if (!fileInput.current.files[0]) {
+    alert("Please select a file!");
+    return;
+  
     }
 
     const formData = new FormData();
@@ -78,6 +82,8 @@ function App() {
 
   return (
     <div className="app-container">
+    <input type="file" ref={fileInput} />
+
       <header className="header">
         <h1>🔎 School Lost & Found</h1>
       </header>
