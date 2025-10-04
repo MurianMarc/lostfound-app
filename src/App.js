@@ -1,15 +1,14 @@
 import React, { useState, useRef } from "react";
-import pb from "./pocketbase"; // your PocketBase connection
+import pb from "./pocketbase"; // make sure you created this file for PocketBase setup
 
 function App() {
-  // State for text description
   const [description, setDescription] = useState("");
 
-  // ✅ Step 2: Create the ref
+  // ✅ Define fileInput INSIDE the component
   const fileInput = useRef(null);
 
-  // ✅ Step 4: Use the ref to upload
   const handleUpload = async () => {
+    // ✅ Use fileInput.current safely
     if (!fileInput.current || !fileInput.current.files[0]) {
       alert("Please select a file!");
       return;
@@ -47,7 +46,7 @@ function App() {
         }}
       />
 
-      {/* ✅ Step 3: Attach the ref */}
+      {/* ✅ Attach ref here */}
       <input type="file" ref={fileInput} style={{ marginBottom: "10px" }} />
 
       <button
